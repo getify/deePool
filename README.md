@@ -39,9 +39,9 @@ deePool.create( objectFactory )
    } );
    ```
 
-### Pool API
+### Pool Instance API
 
-Each pool has four simple methods on its API:
+Each pool instance has four simple methods on its API:
 
 ```js
 pool.use()
@@ -77,7 +77,7 @@ pool.size()
 
    **Note:** If you insert an object instance into a pool that has no empty slots (this is always a mistake, but is not disallowed!), the result will be that the pool grows in size by 1.
 
-* `pool.grow(..)`: A number passed will specify how many instances to add to the pool (created by `objectFactory()` as specified in the [`deePool.create(..)` call](#Library_API)). If no number is passed, the default is the current size of the pool (effectively doubling it in size). Examples:
+* `pool.grow(..)`: A number passed will specify how many instances to add to the pool (created by `objectFactory()` as specified in the [`deePool.create(..)` call](#library-api)). If no number is passed, the default is the current size of the pool (effectively doubling it in size). Examples:
 
    ```js
    var myPool = deePool.create(makeArray);
@@ -125,7 +125,7 @@ npm run-script build-core
 
 ## Tests
 
-To run the tests, you must first [build the core library](#Builds).
+To run the tests, you must first [build the core library](#builds).
 
 With `npm`, run:
 
