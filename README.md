@@ -123,6 +123,24 @@ However, the recommended way to invoke this utility is via npm:
 npm run-script build-core
 ```
 
+## Performance Benchmarks
+
+To run the performance benchmarks, you must first [build the core library](#builds).
+
+With `npm`, run:
+
+```
+npm run perfs
+```
+
+Or, manually:
+
+```
+node node-perfs.js
+```
+
+You can also run the performance benchmarks in your browser by opening up `perfs.html`.
+
 ## Tests
 
 To run the tests, you must first [build the core library](#builds).
@@ -138,6 +156,8 @@ Or, manually:
 ```
 node node-tests.js
 ```
+
+You can also run the tests in your browser by opening up `tests.html`.
 
 ## License
 

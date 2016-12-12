@@ -1,15 +1,17 @@
 {
   "name": "deepool",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "deePool: highly-efficient pool for objects",
   "main": "./lib/deePool.src.js",
   "scripts": {
-    "test": "./node-tests.js",
-    "build-core": "./build-core.js",
+    "test": "node node-tests.js",
+    "build-core": "node build-core.js",
     "build": "npm run build-core",
-    "prepublish": "npm run build-core"
+    "prepublish": "npm run build-core",
+    "perfs": "node node-perfs.js"
   },
   "devDependencies": {
+    "benchmark": "~2.1.2",
     "qunitjs": "~2.1.0",
     "uglify-js": "~2.7.5"
   },
