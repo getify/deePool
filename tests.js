@@ -1,17 +1,3 @@
-function factory(){
-	var publicAPI = {
-		id: 0,
-		make: function make(){
-			return {
-				id: ++publicAPI.id
-			};
-		}
-	};
-
-	return publicAPI;
-}
-
-
 QUnit.test("deePool.create()",function t1(assert){
 	assert.expect(6);
 
@@ -195,3 +181,19 @@ QUnit.test("use() + recycle(): complex",function t6(assert){
 	assert.ok(o12.id === 3,"o12 is third element");
 	assert.ok(o13.id === 1,"o13 is first element");
 });
+
+
+// ******************************
+
+function factory(){
+	var publicAPI = {
+		id: 0,
+		make: function make(){
+			return {
+				id: ++publicAPI.id
+			};
+		}
+	};
+
+	return publicAPI;
+}
