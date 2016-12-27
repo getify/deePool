@@ -8,9 +8,9 @@ if (isNode) {
 	Benchmark.options.onComplete = function onComplete(evt){
 		// TODO
 	};
-	Benchmark.options.onCycle = function(){};
-	Benchmark.options.onError = function(){};
-	Benchmark.options.onAbort = function(){};
+	Benchmark.options.onCycle = function(evt){};
+	Benchmark.options.onError = function(evt){};
+	Benchmark.options.onAbort = function(evt){};
 }
 // otherwise, running in browser
 else {
@@ -22,7 +22,7 @@ else {
 	Benchmark.options.onComplete = function onComplete(evt){
 		// TODO
 	};
-	Benchmark.options.onCycle = function(){};
-	Benchmark.options.onError = function(){};
-	Benchmark.options.onAbort = function(){};
+	Benchmark.options.onCycle = function(evt){};
+	Benchmark.options.onError = function(evt){};
+	Benchmark.options.onAbort = function(evt){};
 }
