@@ -20,6 +20,10 @@
     "pool",
     "performance"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/getify/deePool"
+  },
   "author": "Kyle Simpson <getify@gmail.com>",
   "license": "MIT"
 }
