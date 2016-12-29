@@ -4,10 +4,10 @@ var isNode = (typeof process != "undefined" && process.release);
 if (isNode) {
 	Benchmark.__default_benchmark_options__ = {
 		onStart(evt){
-			// TODO
+			process.stdout.write(`${evt.target.name}...`);
 		},
 		onComplete(evt){
-			// TODO
+			process.stdout.write(` complete: ${evt.target.hz}\n`);
 		},
 		onCycle(evt){},
 		onError(evt){},
@@ -20,10 +20,14 @@ else {
 
 	Benchmark.__default_benchmark_options__ = {
 		onStart(evt){
-			// TODO
+			var div = document.createElement("p");
+			div.innerHTML = `${evt.target.name}...`;
+			results.appendChild(div);
 		},
 		onComplete(evt){
-			// TODO
+			var div = document.createElement("p");
+			div.innerHTML = `...complete: ${evt.target.hz}`;
+			results.appendChild(div);
 		},
 		onCycle(evt){},
 		onError(evt){},

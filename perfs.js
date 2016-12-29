@@ -81,6 +81,8 @@ main.add(
 		item = pool.use();
 	},
 	Object.assign(Benchmark.__default_benchmark_options__,{
+		initCount: 5000,
+		maxTime: 6,
 		setup: function p5Setup(){
 			var item;
 			var pool = deePool.create(makeObj);
@@ -103,6 +105,8 @@ main.add(
 		poolSize = pool.grow(5);
 	},
 	Object.assign(Benchmark.__default_benchmark_options__,{
+		initCount: 5000,
+		maxTime: 6,
 		setup: function p6Setup(){
 			var pool = deePool.create(makeObj);
 			var poolSize = 0;
@@ -124,6 +128,8 @@ main.add(
 		poolSize = pool.grow(500);
 	},
 	Object.assign(Benchmark.__default_benchmark_options__,{
+		initCount: 150,
+		maxTime: 6,
 		setup: function p7Setup(){
 			var pool = deePool.create(makeObj);
 			var poolSize = 0;
@@ -145,6 +151,8 @@ main.add(
 		poolSize = pool.grow(10000);
 	},
 	Object.assign(Benchmark.__default_benchmark_options__,{
+		initCount: 90,
+		maxTime: 6,
 		setup: function p8Setup(){
 			var pool = deePool.create(makeObj);
 			var poolSize = 0;
@@ -168,6 +176,8 @@ main.add(
 		poolSize = pool.grow();
 	},
 	Object.assign(Benchmark.__default_benchmark_options__,{
+		initCount: 19,
+		maxTime: 6,
 		setup: function p9Setup(){
 			var pool = deePool.create(makeObj);
 			var poolSize = pool.grow(2);
@@ -194,6 +204,8 @@ main.add(
 		pool.recycle(item2);
 	},
 	Object.assign(Benchmark.__default_benchmark_options__,{
+		initCount: 5000,
+		maxTime: 6,
 		setup: function p10Setup(){
 			var item1, item2;
 			var pool = deePool.create(makeObj);

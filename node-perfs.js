@@ -5,6 +5,9 @@ global.Benchmark = require("benchmark");
 global.makeObj = makeObj;
 
 require("./benchmark.config.js");
+
+console.log("deePool Performance Benchmarks");
+
 require("./perfs.js");
 
 
