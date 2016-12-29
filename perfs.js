@@ -72,6 +72,8 @@ main.add(
 main.add(
 	"use(): growing pool",
 	function p5(){
+		// can't let the pool get too big or else GC gets
+		// out of control, so reset the pool
 		if (pool.size() > 1E6) {
 			pool = deePool.create(makeObj);
 			pool.grow(5);
@@ -93,6 +95,8 @@ main.add(
 main.add(
 	"grow(): small increments",
 	function p6(){
+		// can't let the pool get too big or else GC gets
+		// out of control, so reset the pool
 		if (poolSize > 1E6) {
 			pool = deePool.create(makeObj);
 		}
@@ -112,6 +116,8 @@ main.add(
 main.add(
 	"grow(): medium increments",
 	function p7(){
+		// can't let the pool get too big or else GC gets
+		// out of control, so reset the pool
 		if (poolSize > 1E6) {
 			pool = deePool.create(makeObj);
 		}
@@ -131,6 +137,8 @@ main.add(
 main.add(
 	"grow(): large increments",
 	function p8(){
+		// can't let the pool get too big or else GC gets
+		// out of control, so reset the pool
 		if (poolSize > 1E6) {
 			pool = deePool.create(makeObj);
 		}
@@ -151,6 +159,8 @@ main.add(
 main.add(
 	"grow(): exponential (doubling)",
 	function p9(){
+		// can't let the pool get too big or else GC gets
+		// out of control, so reset the pool
 		if (poolSize > 1E6) {
 			pool = deePool.create(makeObj);
 			poolSize = pool.grow(2);
@@ -171,6 +181,8 @@ main.add(
 main.add(
 	"use() + recycle(): interleaved",
 	function p10(){
+		// can't let the pool get too big or else GC gets
+		// out of control, so reset the pool
 		if (pool.size() > 1E6) {
 			pool = deePool.create(makeObj);
 			pool.grow(10000);
