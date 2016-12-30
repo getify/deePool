@@ -7,7 +7,8 @@ if (isNode) {
 			process.stdout.write(`${evt.target.name}...`);
 		},
 		onComplete(evt){
-			process.stdout.write(` complete: ${evt.target.hz}\n`);
+			const ops = Math.floor(evt.target.hz);
+			process.stdout.write(` complete: ${Benchmark.formatNumber(ops)} ops/sec (${evt.target.count} samples)\n`);
 		},
 		onCycle(evt){},
 		onError(evt){},
