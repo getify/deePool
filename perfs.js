@@ -217,4 +217,26 @@ main.add(
 	})
 );
 
+main.add(
+	"use() + recycle(): multiple of each",
+	function p11(){
+		for (var i = 0; i < 1000; ++i) {
+			items[i] = pool.use();
+		}
+		for (var i = 0; i < 1000; ++i) {
+			pool.recycle(items[i]);
+		}
+	},
+	Object.assign(Benchmark.__default_benchmark_options__,{
+		setup: function p11Setup(){
+			var items = [];
+			var pool = deePool.create(makeObj);
+			pool.grow(1E6);
+		},
+		teardown: function p11Teardown(){
+			item = pool = null;
+		},
+	})
+);
+
 main.run();
