@@ -18,67 +18,55 @@ QUnit.test("use(): basic",function t2(assert){
 	var inst = factory();
 	var pool = deePool.create(inst.make);
 
-	var o1 = pool.use();
-	var o2 = pool.use();
-	var o3 = pool.use();
-	var o4 = pool.use();
-	var o5 = pool.use();
+	var objects = new Map();
+	var o;
 
-	assert.ok(inst.id === 5,"make() called five times");
-	assert.ok(o1.id === 1,"use() returned o1 with id:1");
-	assert.ok(o2.id === 2,"use() returned o2 with id:2");
-	assert.ok(o3.id === 3,"use() returned o3 with id:3");
-	assert.ok(o4.id === 4,"use() returned o4 with id:4");
-	assert.ok(o5.id === 5,"use() returned o5 with id:5");
+	for (let i = 1; i <= 5; i++) {
+		o = pool.use();
+		assert.ok(!objects.has(o),`use() is unique #${i}`);
+		objects.set(o,i);
+	}
 
-	var o6 = pool.use();
-	var o7 = pool.use();
-	var o8 = pool.use();
-	var o9 = pool.use();
-	var o10 = pool.use();
+	assert.ok(inst.id === 5,"make() was called five times");
 
-	assert.ok(inst.id === 10,"make() called five more times");
-	assert.ok(o6.id === 6,"use() returned o6 with id:6");
-	assert.ok(o7.id === 7,"use() returned o7 with id:7");
-	assert.ok(o8.id === 8,"use() returned o8 with id:8");
-	assert.ok(o9.id === 9,"use() returned o9 with id:9");
-	assert.ok(o10.id === 10,"use() returned o10 with id:10");
+	for (let i = 6; i <= 10; i++) {
+		o = pool.use();
+		assert.ok(!objects.has(o),`use() is unique #${i}`);
+		objects.set(o,i);
+	}
 
-	var o11 = pool.use();
+	assert.ok(inst.id === 10,"make() was called five more times");
 
-	assert.ok(inst.id === 20,"make() called ten more times");
-	assert.ok(o11.id === 11,"use() return o11 with id:11");
+	o = pool.use();
+	assert.ok(!objects.has(o),`use() is unique #11`);
+
+	assert.ok(inst.id === 20,"make() was called ten more times");
 });
 
 QUnit.test("recycle(): basic",function t3(assert){
-	assert.expect(5);
+	assert.expect(6);
 
 	var inst = factory();
 	var pool = deePool.create(inst.make);
 
-	var o1 = pool.use();
-	var o2 = pool.use();
-	var o3 = pool.use();
-	var o4 = pool.use();
-	var o5 = pool.use();
+	var objects = new Map();
 
-	pool.recycle(o1);
-	pool.recycle(o2);
-	pool.recycle(o3);
-	pool.recycle(o4);
-	pool.recycle(o5);
+	for (let i = 1; i <= 5; i++) {
+		let o = pool.use();
+		objects.set(o,i);
+	}
 
-	var o6 = pool.use();
-	var o7 = pool.use();
-	var o8 = pool.use();
-	var o9 = pool.use();
-	var o10 = pool.use();
+	for (let o of objects.keys()) {
+		pool.recycle(o);
+	}
 
-	assert.ok(o6 === o1,"use() after recycle(): o6 === o1");
-	assert.ok(o7 === o2,"use() after recycle(): o7 === o2");
-	assert.ok(o8 === o3,"use() after recycle(): o8 === o3");
-	assert.ok(o9 === o4,"use() after recycle(): o9 === o4");
-	assert.ok(o10 === o5,"use() after recycle(): o10 === o5");
+	for (let i = 1; i <= 5; i++) {
+		let o = pool.use();
+		assert.ok(objects.has(o),`use() not unique after recycle(): #${i}`);
+		objects.set(o,i);
+	}
+
+	assert.ok(inst.id === 5,"make() only called five times");
 });
 
 QUnit.test("grow(): basic",function t4(assert){
@@ -133,53 +121,68 @@ QUnit.test("size(): basic",function t5(assert){
 	assert.ok(pool.size() === 10,"size() after grow() is now ten");
 });
 
-QUnit.test("use() + recycle(): complex",function t6(assert){
+QUnit.test("use() + recycle(): interleaved",function t6(assert){
 	assert.expect(12);
 
 	var inst = factory();
 	var pool = deePool.create(inst.make);
 
-	pool.grow(4);
+	var objects = new Map();
+	var o1, o2, o3, o4, o5, o6, o7;
 
-	var o1 = pool.use();
-	var o2 = pool.use();
+	pool.grow(6);
+
+	for (let i = 1; i <= 6; i++) {
+		o1 = pool.use();
+		objects.set(o1,1);
+	}
+
+	for (let o of objects.keys()) {
+		pool.recycle(o);
+	}
+
+	o1 = pool.use();
+	assert.ok(objects.has(o1),"use() not unique after recycle(): #1");
+
+	o2 = pool.use();
+	assert.ok(objects.has(o2),"use() not unique after recycle(): #2");
+
 	pool.recycle(o1);
+
+	o2 = pool.use();
+	assert.ok(objects.has(o2),"use() not unique after recycle(): #3");
+
+	o3 = pool.use();
+	assert.ok(objects.has(o3),"use() not unique after recycle(): #4");
+
+	o4 = pool.use();
+	assert.ok(objects.has(o4),"use() not unique after recycle(): #5");
+
 	pool.recycle(o2);
+	pool.recycle(o4);
 
-	var o3 = pool.use();
-	var o4 = pool.use();
+	o2 = pool.use();
+	assert.ok(objects.has(o2),"use() not unique after recycle(): #6");
 
-	assert.ok(o3.id === 3,"o3 is third element");
-	assert.ok(o4.id === 4,"o4 is fourth element");
+	o4 = pool.use();
+	assert.ok(objects.has(o4),"use() not unique after recycle(): #7");
 
-	pool.recycle(o3);
-	var o5 = pool.use();
-	var o6 = pool.use();
-	var o7 = pool.use();
+	o5 = pool.use();
+	assert.ok(objects.has(o5),"use() not unique after recycle(): #8");
 
-	assert.ok(o5.id === 1,"o5 is first element");
-	assert.ok(o6.id === 2,"o6 is second element");
-	assert.ok(o7.id === 3,"o7 is third element");
+	o6 = pool.use();
+	assert.ok(objects.has(o6),"use() not unique after recycle(): #9");
 
-	// should grow pool
-	var o8 = pool.use();
-	var o9 = pool.use();
-
-	assert.ok(inst.id === 8,"make() called four more times");
-	assert.ok(o8.id === 5,"o8 is fifth element");
-	assert.ok(o9.id === 6,"o9 is sixth element");
-
-	pool.recycle(o7);
 	pool.recycle(o5);
-	var o10 = pool.use();
-	var o11 = pool.use();
-	var o12 = pool.use();
-	var o13 = pool.use();
 
-	assert.ok(o10.id === 7,"o10 is seventh element");
-	assert.ok(o11.id === 8,"o11 is eighth element");
-	assert.ok(o12.id === 3,"o12 is third element");
-	assert.ok(o13.id === 1,"o13 is first element");
+	o5 = pool.use();
+	assert.ok(objects.has(o5),"use() not unique after recycle(): #10");
+
+	// should grow pool (doubling its size)
+	o7 = pool.use();
+	assert.ok(!objects.has(o7),"use() unique after implicit grow()");
+
+	assert.ok(inst.id === 12,"make() called twelve times total");
 });
 
 
