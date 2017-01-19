@@ -148,14 +148,14 @@ npm run perfs
 Or, manually:
 
 ```
-node node-perfs.js
+node perfs/node-perfs.js
 ```
 
 **The performance benchmark utility expects Node.js version 6+.**
 
-You can also run the performance benchmarks in your browser by opening up `perfs.html` (requires ES6+ environment).
+You can also run the performance benchmarks in your browser by opening up `perfs/index.html` (requires ES6+ environment).
 
-**Note:**: For UI responsiveness reasons, the browser hosting of the test suite runs in a web worker. Due to browser security restrictions around web workers, you will likely need to access `perfs.html` via a web context (like `http://localhost/perfs.html`, via a local web-server instance in the main project root) instead of file context (like `file:///perfs.html`).
+**Note:**: For UI responsiveness reasons, the browser hosting of the test suite runs in a web worker. Due to browser security restrictions around web workers, you will likely need to access `perfs/index.html` via a web context (like `http://localhost/perfs/index.html`, via a local web-server instance in the main project root) instead of file context (like `file:///perfs/index.html`).
 
 ## Tests
 
@@ -170,7 +170,7 @@ npm test
 Or, manually:
 
 ```
-node node-tests.js
+node tests/node-tests.js
 ```
 
 **The unit test utility expects Node.js version 6+.**
