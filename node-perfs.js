@@ -8,7 +8,7 @@ require("./benchmark.config.js");
 
 console.log("deePool Performance Benchmarks");
 
-require("./perfs.js");
+global.main = require("./perfs.js");
 
 
 // **********************

@@ -155,6 +155,8 @@ node node-perfs.js
 
 You can also run the performance benchmarks in your browser by opening up `perfs.html` (requires ES6+ environment).
 
+**Note:**: For UI responsiveness reasons, the browser hosting of the test suite runs in a web worker. Due to browser security restrictions around web workers, you will likely need to access `perfs.html` via a web context (like `http://localhost/perfs.html`, via a local web-server instance in the main project root) instead of file context (like `file:///perfs.html`).
+
 ## Tests
 
 To run the tests, you must first [build the core library](#builds).

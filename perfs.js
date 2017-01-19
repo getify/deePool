@@ -217,4 +217,16 @@ main.add(
 	})
 );
 
-main.run();
+// running as node module?
+if (module && module.exports) {
+	module.exports = main;
+
+	// give time for this module to return before running the suite
+	process.nextTick(function next(){
+		main.run();
+	});
+}
+else {
+	main.run();
+}
+
