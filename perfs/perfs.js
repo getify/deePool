@@ -218,7 +218,7 @@ main.add(
 );
 
 // running as node module?
-if (module && module.exports) {
+if (typeof module !== "undefined" && module.exports) {
 	module.exports = main;
 
 	// give time for this module to return before running the suite

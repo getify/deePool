@@ -1,5 +1,5 @@
 var results = document.getElementById("results");
-var perfWorker = new Worker("perfs-browser-worker.js?" + Math.random());
+var perfWorker = new Worker("browser-worker.js");
 
 perfWorker.addEventListener("message",function onMessage({ data: evt }){
 	benchmarkCallbacks[evt.type](evt);
