@@ -1,6 +1,6 @@
 {
   "name": "deepool",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "deePool: highly-efficient pool for objects",
   "main": "./lib/deePool.src.js",
   "scripts": {

@@ -70,40 +70,44 @@ QUnit.test("recycle(): basic",function t3(assert){
 });
 
 QUnit.test("grow(): basic",function t4(assert){
-	assert.expect(10);
+	assert.expect(13);
 
 	var inst = factory();
 	var pool = deePool.create(inst.make);
+	var s;
 
-	pool.grow();
-	assert.ok(inst.id === 0,"grow() with no arg has no effect on empty pool");
+	s = pool.grow();
+	assert.ok(s === 0 && inst.id === 0,"grow() with no arg has no effect on empty pool");
 
-	pool.grow("nothing");
-	assert.ok(inst.id === 0,"grow('nothing') has no effect on pool");
+	s = pool.grow("nothing");
+	assert.ok(s === 0 && inst.id === 0,"grow('nothing') has no effect on pool");
 
-	pool.grow(-3);
-	assert.ok(inst.id === 0,"grow(-3) has no effect on pool");
+	s = pool.grow(-3);
+	assert.ok(s === 0 && inst.id === 0,"grow(-3) has no effect on pool");
 
-	pool.grow(0);
-	assert.ok(inst.id === 0,"grow(0) has no effect on pool");
+	s = pool.grow(0);
+	assert.ok(s === 0 && inst.id === 0,"grow(0) has no effect on pool");
 
-	pool.grow(3);
+	s = pool.grow(3);
 	assert.ok(inst.id === 3,"grow(3) called make() three times");
+	assert.ok(s === 3,"grow() returned size 3");
 
-	pool.grow(5);
+	s = pool.grow(5);
 	assert.ok(inst.id === 8,"grow(5) called make() five more times");
+	assert.ok(s === 8,"grow() returned size 8");
 
-	pool.grow();
+	s = pool.grow();
 	assert.ok(inst.id === 16,"grow() with no arg doubles the current size of the pool");
+	assert.ok(s === 16,"grow() returned size 16");
 
-	pool.grow("nothing");
-	assert.ok(inst.id === 16,"grow('nothing') still has no effect on pool");
+	s = pool.grow("nothing");
+	assert.ok(s === 16 && inst.id === 16,"grow('nothing') still has no effect on pool");
 
-	pool.grow(-3);
-	assert.ok(inst.id === 16,"grow(-3) still has no effect on pool");
+	s = pool.grow(-3);
+	assert.ok(s === 16 && inst.id === 16,"grow(-3) still has no effect on pool");
 
-	pool.grow(0);
-	assert.ok(inst.id === 16,"grow(0) still has no effect on pool");
+	s = pool.grow(0);
+	assert.ok(s === 16 && inst.id === 16,"grow(0) still has no effect on pool");
 });
 
 QUnit.test("size(): basic",function t5(assert){
