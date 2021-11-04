@@ -1,6 +1,6 @@
 # deePool
 
-A highly-efficient simple (no frills) object pool.
+A highly-efficient, simple (no frills) object pool.
 
 ## Explanation
 
@@ -9,10 +9,6 @@ A highly-efficient simple (no frills) object pool.
 As such, there are no configuration options to tweak behavior. It does one thing, and one thing well. If you want to re-configure the behavior, modify the code. :)
 
 Also, this library doesn't really try to do much in the way of graceful handling of errors or mistakes, as that stuff just slows it down. You should be careful in how you use *deePool*.
-
-## Environment Support
-
-This library uses ES6+ features. If you need to support ES<=5 environments, transpile it first (with Babel, etc).
 
 ## Library API
 
@@ -117,23 +113,63 @@ pool.size()
    myPool.size();     // 20
    ```
 
+## npm Package
+
+To install this package from `npm`:
+
+```
+npm install deepool
+```
+
+And to require it in a node script:
+
+```js
+var deePool = require("deepool");
+// e.g.
+//    x = deePool.create(..);
+
+// or:
+var { create } = require("deepool");
+// e.g.
+//    x = create(..);
+```
+
+As of version 3.0.0, the package is also available as an ES Module, and can be imported as so:
+
+```js
+import deePool from "deepool";
+// e.g.
+//    x = deePool.create(..);
+
+// or:
+import { create } from "deePool";
+// e.g.
+//    x = create(..);
+```
+
 ## Builds
 
-The distribution library file (`deePool.js`) can be built (~~minified~~) with an included utility. **Note:** Minification is currently disabled.
+[![npm Module](https://badge.fury.io/js/deepool.svg)](https://www.npmjs.org/package/deepool)
 
-With `npm`, run:
+The distribution files come pre-built with the npm package distribution, so you shouldn't need to rebuild it under normal circumstances.
 
-```
-npm run build-core
-```
+However, if you download this repository via Git:
 
-Or, manually:
+1. The included build utility (`scripts/build-core.js`) builds (and minifies) the `dist/*` files.
 
-```
-node build-core.js
-```
+2. To install the build and test dependencies, run `npm install` from the project root directory.
 
-**The build utility expects Node.js version 6+.**
+3. To manually run the build utility with npm:
+
+    ```
+    npm run build
+    ```
+
+4. To run the build utility directly without npm:
+
+    ```
+    node scripts/build-core.js
+    ```
 
 ## Performance Benchmarks
 
@@ -151,34 +187,34 @@ Or, manually:
 node perfs/node-perfs.js
 ```
 
-**The performance benchmark utility expects Node.js version 6+.**
+You can also run the performance benchmarks in your browser by opening up `perfs/index.html`.
 
-You can also run the performance benchmarks in your browser by opening up `perfs/index.html` (requires ES6+ environment).
-
-**Note:**: For UI responsiveness reasons, the browser hosting of the test suite runs in a web worker. Due to browser security restrictions around web workers, you will likely need to access `perfs/index.html` via a web context (like `http://localhost/perfs/index.html`, via a local web-server instance in the main project root) instead of file context (like `file:///perfs/index.html`).
+**Note:**: For UI responsiveness reasons, the browser hosting of the test suite runs in a web worker. Due to browser security restrictions around web workers, you will need to access `perfs/index.html` via a web context (like `http://localhost:8080/perfs/index.html`, via a local web-server instance in the main project root) instead of file context (like `file:///perfs/index.html`).
 
 ## Tests
 
-To run the tests, you must first [build the core library](#builds).
+A test suite is included in this repository, as well as the npm package distribution. The default test behavior runs the test suite using the files in `src/`.
 
-With `npm`, run:
+1. The tests are run with QUnit.
 
-```
-npm test
-```
+2. You can run the tests in a browser by opening up `tests/index.html`.
 
-Or, manually:
+3. To run the test utility:
 
-```
-node tests/node-tests.js
-```
+    ```
+    npm test
+    ```
 
-**The unit test utility expects Node.js version 6+.**
+    Other npm test scripts:
 
-You can also run the tests in your browser by opening up `tests.html` (requires ES6+ environment).
+    * `npm run test:package` will run the test suite as if the package had just been installed via npm. This ensures `package.json`:`main` and `exports` entry points are properly configured.
+
+    * `npm run test:umd` will run the test suite against the `dist/umd/*` files instead of the `src/*` files.
+
+    * `npm run test:esm` will run the test suite against the `dist/esm/*` files instead of the `src/*` files.
+
+    * `npm run test:all` will run all four modes of the test suite.
 
 ## License
 
-The code and all the documentation are released under the MIT license.
-
-http://getify.mit-license.org/
+All code and documentation are (c) 2021 Kyle Simpson and released under the [MIT License](http://getify.mit-license.org/). A copy of the MIT License [is also included](LICENSE.txt).

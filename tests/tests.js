@@ -1,3 +1,5 @@
+"use strict";
+
 QUnit.test("deePool.create()",function t1(assert){
 	assert.expect(6);
 

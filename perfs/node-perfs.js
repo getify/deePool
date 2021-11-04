@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-global.deePool = require("../lib/deePool.src.js");
+global.deePool = require("../dist/umd/deePool.js");
 global.Benchmark = require("benchmark");
 global.makeObj = makeObj;
 
