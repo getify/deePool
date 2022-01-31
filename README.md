@@ -1,5 +1,9 @@
 # deePool
 
+[![npm Module](https://badge.fury.io/js/deepool.svg)](https://www.npmjs.org/package/deepool)
+[![Modules](https://img.shields.io/badge/modules-ESM%2BUMD%2BCJS-a1356a)](https://nodejs.org/api/packages.html#dual-commonjses-module-packages)
+[![License](https://img.shields.io/badge/license-MIT-a1356a)](LICENSE.txt)
+
 A highly-efficient, simple (no frills) object pool.
 
 ## Explanation
@@ -150,6 +154,7 @@ import { create } from "deePool";
 ## Builds
 
 [![npm Module](https://badge.fury.io/js/deepool.svg)](https://www.npmjs.org/package/deepool)
+[![Modules](https://img.shields.io/badge/modules-ESM%2BUMD%2BCJS-a1356a)](https://nodejs.org/api/packages.html#dual-commonjses-module-packages)
 
 The distribution files come pre-built with the npm package distribution, so you shouldn't need to rebuild it under normal circumstances.
 
@@ -216,5 +221,7 @@ A test suite is included in this repository, as well as the npm package distribu
     * `npm run test:all` will run all four modes of the test suite.
 
 ## License
+
+[![License](https://img.shields.io/badge/license-MIT-a1356a)](LICENSE.txt)
 
 All code and documentation are (c) 2021 Kyle Simpson and released under the [MIT License](http://getify.mit-license.org/). A copy of the MIT License [is also included](LICENSE.txt).
