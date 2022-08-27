@@ -1,6 +1,6 @@
 {
 	"name": "deepool",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"description": "deePool: highly-efficient pool for objects",
 	"main": "./src/deePool.js",
 	"browser": "./src/deePool.js",
@@ -17,8 +17,8 @@
 	},
 	"devDependencies": {
 		"benchmark": "~2.1.4",
-		"moduloze": "~0.8.0",
-		"qunit": "~2.17.2"
+		"moduloze": "~0.9.1",
+		"qunit": "~2.19.1"
 	},
 	"mz-dependencies": {
 		"deePool.js": "deePool"
